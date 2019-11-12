@@ -1,0 +1,15 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        next_number = n
+        list_ = set()
+        while next_number != 1:
+            string_i = str(next_number)
+            next_number = 0
+            for char in string_i:            
+                next_number += int(char) ** 2
+            if next_number not in list_:
+                list_.add(next_number)
+            else:
+                return False
+        return True
+        
