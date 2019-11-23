@@ -1,0 +1,14 @@
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        max_depth = 0
+        q = [root] if root else []
+        while q:
+            max_depth += 1
+            list_=[]
+            for node in q:
+                if node.left != None:
+                    list_.append(node.left)
+                if node.right != None:
+                    list_.append(node.right)
+            q = list_
+        return max_depth
