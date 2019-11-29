@@ -1,0 +1,11 @@
+Algorithm DFS（root）
+  s.append(root)
+  while s:
+    nextnode = s.pop()
+    if nextnode == target:
+      return True
+    else:
+      s.append(nextnode.right)
+      s.append(nextnode.left)
+      
+  
