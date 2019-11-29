@@ -1,0 +1,9 @@
+algorithm TreeSearch(Key k, Position v): Position
+if isExternal(v):
+  return v
+elif k=key(v):
+  return v
+elif k<key(v): 
+  return TreeSearch(k,leftChild(v)) 
+else:
+  return TreeSearch(k,rightChild(v))
