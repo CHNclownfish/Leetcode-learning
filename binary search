@@ -1,0 +1,12 @@
+algorithm BSearch(SequenceS, Key k, int low, int high): Item :
+  if low > high: 
+    return NO_SUCH_KEY
+  else:
+    int mid = (low+high)/2;
+  Position midp ← posAtRank(mid);
+  if k = key(midp):
+    return midp.getCont()
+  elif k < key(midp):
+    return BSearch(S,k,low,mid-1)
+  else:
+    return BSearch(S,k,mid+1,high)
