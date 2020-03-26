@@ -1,0 +1,11 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        res = []
+        for n in nums:
+            if nums[abs(n)-1] < 0:
+                res.append(abs(n))
+            else:
+                nums[abs(n)-1] 
+        return res
+#when the number apears, than change the number under this index whit a "-", everytime come a new number, if the number
+#with this index already changed, means this number have been showed before
