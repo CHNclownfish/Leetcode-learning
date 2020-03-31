@@ -1,0 +1,20 @@
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        if len(rating) < 3:
+            return 0
+        d_greater = defaultdict(int)
+        d_less = defaultdict(int)
+        res = 0
+        for i in range(len(rating)-1):
+            for j in range(i+1,len(rating)):
+                if rating[j] > rating[i]:
+                    d_greater[i] += 1
+                else:
+                    d_less[i] += 1
+        for i in range(len(rating)-2):
+            for j in range(i+1,len(rating)-1):
+                if rating[i] < rating[j]:
+                    res += d_greater[j]
+                else:
+                    res += d_less[j]
+        return res
