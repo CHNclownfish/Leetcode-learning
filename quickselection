@@ -1,0 +1,30 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def partition(num,left,right,pivotIndex):
+            pivoteValue = num[pivotIndex]
+            storeIndex = left
+            for i in range(left,right):
+                if num[i] >= pivoteValue:
+                    cnt = num[storeIndex]
+                    num[storeIndex] = num[i]
+                    num[i] = cnt
+                    storeIndex += 1
+            cnt = num[right]
+            num[right] = num[storeIndex]
+            num[storeIndex] = cnt
+            return storeIndex
+       
+        def select(num,left,right,k):
+            if left == right:
+                return num[left]
+            pivotIndex = right
+            pivotIndex = partition(num,left,right,pivotIndex)
+            if k == pivotIndex+1:       
+                return num[pivotIndex]
+            elif k < pivotIndex+1:
+                right = pivotIndex-1
+                return select(num,left,right,k)
+            else:
+                left = pivotIndex+1
+                return select(num,left,right,k)
+        return select(nums,0,len(nums)-1,k)
