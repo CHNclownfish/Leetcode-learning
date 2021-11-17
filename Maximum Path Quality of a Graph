@@ -1,0 +1,15 @@
+def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime: int) -> int:
+        g = defaultdict(dict)
+        for i,j,t in edges:
+            g[i][j] = g[j][i] = t
+        
+        def dfs(src,seen,time):
+            res = sum(values[i] for i in seen) if src == 0 else 0
+            
+           
+            for n in g[src]:
+                if time >= g[src][n]:
+                    res = max(res,dfs(n,{n}|seen,time-g[src][n]))
+            return res
+        
+        return dfs(0,{0},maxTime)
