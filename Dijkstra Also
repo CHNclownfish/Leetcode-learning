@@ -1,0 +1,30 @@
+class Solution:
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        g = defaultdict(list)
+        for u,v,t in roads:
+            g[u].append([v,t])
+            g[v].append([u,t])
+        
+        return self.dijkstra(0,n,g)
+        
+    def dijkstra(self,src,n,g):
+        dist = [float('inf') for i in range(n)]
+        ways = [0 for i in range(n)]
+        heapq = [(0,src)]
+        dist[src] = 0
+        ways[src] = 1
+        
+        while heapq:
+            d, cur = heappop(heapq)
+            if d > dist[cur]:
+                continue
+            for nei,cost in g[cur]:
+                if dist[cur] + cost < dist[nei]:
+                    dist[nei] = dist[cur] + cost
+                    ways[nei] = ways[cur]
+                    heappush(heapq,(dist[nei],nei))
+                elif dist[cur] + cost == dist[nei]:
+                    ways[nei] += ways[cur]
+        
+        return ways[-1] % (10 ** 9 + 7)
+    
