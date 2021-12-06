@@ -1,0 +1,33 @@
+class Solution:
+    def validArrangement(self, pairs: List[List[int]]) -> List[List[int]]:
+        
+        g,inD,outD = defaultdict(list), defaultdict(int), defaultdict(int)
+        
+        for p,q in pairs:
+            g[p].append(q)
+            inD[q] += 1
+            outD[p] += 1
+         
+        for k in g:
+            start = k
+            if outD[k] - inD[k] == 1:
+                start = k
+                break
+        
+        trace = []
+       
+        def dfs(node):
+            while g[node]:
+                new_node = g[node].pop()
+                dfs(new_node)
+            trace.append(node)
+        
+        dfs(start)
+    
+    
+        res = []
+        n = len(trace)
+        for i in range(len(trace)-1):
+            res.append([trace[n-1-i], trace[n-2-i]])
+        
+        return res
