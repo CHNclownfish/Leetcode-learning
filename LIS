@@ -1,0 +1,27 @@
+# see leetcode 300
+# method 1 dp
+def lengthOfLIS(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        n = len(nums)
+        dp = [1 for i in range(len(nums))]
+        
+        for i in range(n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], d[j] + 1])
+        return max(dp)
+        
+# method 2  Greedy with Binary Search
+def lengthOfLIS(self, nums: List[int]) -> int:
+        sub = []
+        
+        for x in nums:
+            if len(sub) == 0 or sub[-1] < x:
+                sub.append(x)
+            else:
+                pos = bisect.bisect_left(sub,x)
+                sub[pos] = x
+        return len(sub)
+        
+
