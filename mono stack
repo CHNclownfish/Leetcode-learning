@@ -1,0 +1,21 @@
+def smallestSubsequence(self, s: str, k: int, letter: str, r: int) -> str:
+        stack = []
+        numOfletter = len([l for l in s if l == letter])
+        n = len(s)
+        for i, ch in enumerate(s):
+            while stack and stack[-1] > ch and n - i + len(stack) > k and (stack[-1] != letter or numOfletter > r):
+                c = stack.pop()
+                if c == letter:
+                    r += 1
+            
+            if len(stack) < k:
+                if ch == letter:
+                    stack.append(ch)
+                    r -= 1
+                elif k - len(stack) > r:
+                    stack.append(ch)
+            
+            if ch == letter:
+                numOfletter -= 1
+        
+        return ''.join(stack)
