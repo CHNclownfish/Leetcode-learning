@@ -1,0 +1,16 @@
+def getRandom(self) -> int:
+        """
+        Returns a random node's value.
+        """
+        scope = 1
+        chosen_value = 0
+        curr = self.head
+
+        while curr:
+            # decide whether to include the element in reservoir
+            if random.random() < 1 / scope:
+                chosen_value = curr.val
+            # move on to the next node
+            curr = curr.next
+            scope += 1
+        return chosen_value
