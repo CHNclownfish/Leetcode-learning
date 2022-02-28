@@ -1,0 +1,32 @@
+class BIT:
+    def __init__(self,nums):
+        self.nums = nums
+        self.bit = [0 for i in range(len(nums)+1)]
+        self.n = len(self.bit)
+
+    def lowbit(self,x):
+        return (x & (-x))
+
+
+    def build(self):
+        for i in range(1,self.n):
+            lb = self.lowbit(i)
+            for j in range(i-lb,i):
+                self.bit[i] += self.nums[j]
+        return self.bit
+
+    def update(self,i,delta):
+        while i < self.n:
+            self.bit[i] += delta
+            i += self.lowbit(i)
+
+        return self.bit
+
+    def query(self,k):
+        ans = 0
+        while k > 0:
+            ans += self.bit[k]
+            k -= self.lowbit(k)
+
+        return ans
+
