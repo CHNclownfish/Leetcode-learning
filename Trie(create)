@@ -1,0 +1,37 @@
+from collections import defaultdict
+
+class Trie:
+    def __init__(self):
+        self.children = defaultdict(Trie)
+        self.is_word = False
+
+    def insert(self,word):
+        node = self
+        for ch in word:
+            node = node.children[ch]
+        node.is_word = True
+
+    def search(self,word):
+        node = self
+        for ch in word:
+            if ch not in node.children:
+                return False
+            node = node.children[ch]
+        return node.is_word
+
+    def startwith(self,s):
+        node = self
+        for ch in s:
+            if ch not in node.children:
+                return False
+            node = node.children[ch]
+        return True
+
+nt = Trie()
+print(nt,
+nt.insert('apple'),
+nt.search('apple'),
+nt.search('app'),
+nt.startwith('app'),
+nt.insert('app'),
+nt.search('app'))
