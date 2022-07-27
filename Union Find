@@ -5,7 +5,7 @@ def findAllPeople(self, n: int, meetings: List[List[int]], f: int) -> List[int]:
         
         def find(i):
             while uf[i] != i:
-                uf[i] = find(uf[i])
+                i = find(uf[i])
                 
             return uf[i]
         
